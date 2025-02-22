@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+</head>
+<body>
+    <h2>TODO List</h2>
+    <input type="text" id="todoInput">
+    <button onclick="addTodo()">Add TODO</button>
+    <ul id="todoList"></ul>
+
+    <script>
+        function loadTodos() {
+            var todos = JSON.parse(localStorage.getItem("todos")) || [];
+            var list = document.getElementById("todoList");
+            list.innerHTML = "";
+            for (var i = 0; i < todos.length; i++) {
+                addTodoToList(todos[i]);
+            }
+        }
+        function saveTodos() {
+            var items = document.querySelectorAll("#todoList li");
+            var todos = [];
+            for (var i = 0; i < items.length; i++) {
+                todos.push(items[i].firstChild.nodeValue);
+            }
+            localStorage.setItem("todos", JSON.stringify(todos));
+        }
+
+        function addTodo() {
+            var input = document.getElementById("todoInput");
+            var task = input.value;
+            if (task === "") {
+                return;
+            }
+            addTodoToList(task);
+            saveTodos();
+            input.value = "";
+        }
+
+        function addTodoToList(task) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(task));
+
+            var editButton = document.createElement("button");
+            editButton.innerHTML = "Edit";
+            editButton.onclick = function () {
+                var newTask = prompt("Edit task:", li.firstChild.nodeValue);
+                if (newTask !== null && newTask !== "") {
+                    li.firstChild.nodeValue = newTask;
+                    saveTodos();
+                }
+            };
+
+            var deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "Delete";
+            deleteButton.onclick = function () {
+                li.remove();
+                saveTodos();
+            };
+
+            li.appendChild(editButton);
+            li.appendChild(deleteButton);
+            document.getElementById("todoList").appendChild(li);
+        }
+
+        loadTodos();
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+</head>
+
+<body>
+    <div class="calculator-container">
+        <h2>Simple Calculator</h2>
+
+        <div class="calculator-box">
+           Enter Value: <input type="number" id="input1" placeholder="Enter value 1"><br><br>
+           Enter Value:<input type="number" id="input2" placeholder="Enter value 2"><br><br>
+           Result: <input type="text" id="output" placeholder="Result" readonly><br><br>
+        </div>
+
+        <div class="buttons">
+            <button onclick="add()">Add</button>
+            <button onclick="subtract()">Subtract</button>
+            <button onclick="multiply()">Multiply</button>
+            <button onclick="divide()">Divide</button>
+            <button onclick="reset()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        function add() {
+            let num1 = parseFloat(document.getElementById('input1').value);
+            let num2 = parseFloat(document.getElementById('input2').value);
+            let result = num1 + num2;
+            document.getElementById('output').value = result;
+        }
+
+        function subtract() {
+            let num1 = parseFloat(document.getElementById('input1').value);
+            let num2 = parseFloat(document.getElementById('input2').value);
+            let result = num1 - num2;
+            document.getElementById('output').value = result;
+        }
+
+        function multiply() {
+            let num1 = parseFloat(document.getElementById('input1').value);
+            let num2 = parseFloat(document.getElementById('input2').value);
+            let result = num1 * num2;
+            document.getElementById('output').value = result;
+        }
+
+        function divide() {
+            let num1 = parseFloat(document.getElementById('input1').value);
+            let num2 = parseFloat(document.getElementById('input2').value);
+
+            if (num2 === 0) {
+                document.getElementById('output').value = 'Error: Div by 0';
+            } else {
+                let result = num1 / num2;
+                document.getElementById('output').value = result;
+            }
+        }
+
+        function reset() {
+            document.getElementById('input1').value = '';
+            document.getElementById('input2').value = '';
+            document.getElementById('output').value = '';
+        }
+    </script>
+</body>
+
+</html>

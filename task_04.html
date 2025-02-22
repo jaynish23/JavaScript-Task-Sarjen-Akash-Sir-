@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time and Date</title>
+</head>
+<body>
+    <h1>Current Time and Date</h1>
+    <h2 id="clock"></h2>
+
+    <script>
+        function updateClock() {
+                const now = new Date();
+                let timeString = now.toLocaleTimeString();
+                let dateString = now.toDateString();
+                document.getElementById("clock").textContent = dateString + " | " + timeString;
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock();
+    </script>
+</body>
+</html>

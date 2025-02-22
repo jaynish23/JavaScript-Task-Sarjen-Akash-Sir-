@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Timer</title>
+</head>
+
+<body>
+    <h2>OTP Timer</h2>
+    <button id="sendOtp" onclick="startTimer()">Send OTP</button>
+    <button id="resendOtp" onclick="startTimer()" style="display: none;">Resend OTP</button>
+    <p>Time Left: <span id="timer">00:30</span></p>
+    <script>
+        let timer;
+        let countdown = 30;
+
+        function startTimer() {
+            let timerDisplay = document.getElementById("timer");
+            let sendBtn = document.getElementById("sendOtp");
+            let resendBtn = document.getElementById("resendOtp");
+
+            sendBtn.style.display = "none";
+            resendBtn.style.display = "none";
+            timerDisplay.innerText = "00:30";
+
+            countdown = 30;
+            timer = setInterval(() => {
+                countdown--;
+                timerDisplay.innerText = `00:${countdown < 10 ? '0' + countdown : countdown}`;
+
+                if (countdown === 0) {
+                    clearInterval(timer);
+                    timerDisplay.innerText = "00:00";
+                    resendBtn.style.display = "block";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>
+        input[type="button"] {
+            width: 50px;
+            height: 50px;
+        }
+
+        input[type="text"] {
+            width: 205px;
+            height: 50px;
+        }
+    </style>
+    <title>Calculator</title>
+</head>
+
+<body>
+    <table style=" border: 1px solid black">
+        <tr>
+            <th>Calculator</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="ipBox" disabled value="0" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="1" onclick="addToExpression(1)" />
+                <input type="button" value="2" onclick="addToExpression(2)" />
+                <input type="button" value="3" onclick="addToExpression(3)" />
+                <input type="button" value="+" onclick="addToExpression('+')" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="4" onclick="addToExpression(4)" />
+                <input type="button" value="5" onclick="addToExpression(5)" />
+                <input type="button" value="6" onclick="addToExpression(6)" />
+                <input type="button" value="-" onclick="addToExpression('-')" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="7" onclick="addToExpression(7)" />
+                <input type="button" value="8" onclick="addToExpression(8)" />
+                <input type="button" value="9" onclick="addToExpression(9)" />
+                <input type="button" value="*" onclick="addToExpression('*')" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="C" onclick="clearFields()" />
+                <input type="button" value="0" onclick="addToExpression(0)" />
+                <input type="button" value="=" onclick="calculate()" />
+                <input type="button" value="/" onclick="addToExpression('/')" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="opBox" disabled value="0" />
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        var expression = "";
+        var answer = 0;
+        function clearFields() {
+            document.getElementById('ipBox').value = "0";
+            document.getElementById('opBox').value = "0";
+            expression = "";
+        }
+        function addToExpression(value) {
+            expression += value;
+            document.getElementById('ipBox').value = expression;
+        }
+        function calculate() {
+            answer = eval(expression);
+            document.getElementById("opBox").value = answer;
+        }
+    </script>
+
+</body>
+
+</html>

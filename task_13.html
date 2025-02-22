@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+
+<body>
+    <form onsubmit="return validateForm()">
+        <h3>Enter Name:
+            <input type="text" id="name" required />
+        </h3>
+        <h3>
+            Mobile Number: <input type="number" id="mobile" required />
+        </h3>
+        <h3>Gender:</h3>
+        <label><input type="radio" name="gender" value="Male" required /> Male</label>
+        <label><input type="radio" name="gender" value="Female" required /> Female</label>
+
+        <h3>Hobbies:</h3>
+        <label><input type="checkbox" name="hobby" value="Minesweeper" />Reading</label>
+        <label><input type="checkbox" name="hobby" value="Games" />Dancing</label>
+        <label><input type="checkbox" name="hobby" value="Novels" />Singing</label>
+
+        <h3>City:</h3>
+        <select id="city" required>
+            <option value="" disabled selected>Select City</option>
+            <option value="Anand">Anand</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Vadodara">Vadodara</option>
+            <option value="Surat">Rajkot</option>
+        </select>
+        <br>
+        <hr>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var mobile = document.getElementById("mobile").value;
+            var gender = document.querySelector('input[name="gender"]:checked')?.value;
+            var hobbies = Array.from(document.querySelectorAll('input[name="hobby"]:checked')).map(checkbox => checkbox.value);
+            var city = document.getElementById("city").value;
+            if (!name) {
+                alert("Name cannot be empty");
+                return false;
+            }
+            if (mobile.length !== 10) {
+                alert("Mobile number should be of 10 digits");
+                return false;
+            }
+            if (!gender) {
+                alert("Select 1 gender");
+                return false;
+            }
+            displayData(name, mobile, gender, hobbies, city);
+            return false;
+        }
+
+        function displayData(name, mobile, gender, hobbies, city) {
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `
+                    <h3>Submitted Data</h3>
+                    <table border="1">
+                        <tr><th>Name</th><td>${name}</td></tr>
+                        <tr><th>Mobile</th><td>${mobile}</td></tr>
+                        <tr><th>Gender</th><td>${gender}</td></tr>
+                        <tr><th>Hobbies</th><td>${hobbies.join(", ")}</td></tr>
+                        <tr><th>City</th><td>${city}</td></tr>
+                    </table>
+                `;
+        }
+    </script>
+</body>
+
+</html>

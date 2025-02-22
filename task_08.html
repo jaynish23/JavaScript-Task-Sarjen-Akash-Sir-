@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Game</title>
+</head>
+
+<body onload="generateRandomNumber()">
+    <h2>Guess the number (1 to 100):</h2>
+    <input type="number" id="guess" placeholder="Enter number" />
+    <hr />
+    <input type="button" onclick="checkGuess()" value="Guess" />
+    <p id="result"></p>
+</body>
+<script>
+    var randomNumber;
+    var attempts = 4;  
+
+    function generateRandomNumber() {
+        randomNumber = Math.floor(Math.random() * 100) + 1; // Range 1-100
+    }
+
+    function checkGuess() {
+        var guessInput = document.getElementById("guess");
+        var resultText = document.getElementById("result");
+
+        if (guessInput.value === "") {
+            alert("Please enter a number!");
+            return;
+        }
+
+        var guess = parseInt(guessInput.value);
+
+        if (guess < 1 || guess > 100) {
+            alert("Please enter a number between 1 and 100!");
+            return;
+        }
+
+        if (guess === randomNumber) {
+            resultText.innerHTML = "<h3>You guessed it right!</h3>";
+            resultText.style.color = "green";
+            guessInput.disabled = true;
+        } else {
+            attempts--;  
+            if (attempts > 0) {
+                resultText.innerHTML = `<h3>Wrong guess! ${attempts} attempts left.</h3>`;
+                resultText.style.color = "red";
+            } else {
+                resultText.innerHTML = `<h3>Game Over! The number was ${randomNumber}.</h3>`;
+                resultText.style.color = "red";
+                guessInput.disabled = true; 
+            }
+        }
+    }
+</script>
+</html>
